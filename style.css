@@ -1,0 +1,117 @@
+/* FILM GRAIN & ATMOSPHERE */
+body {
+    background-color: #030303;
+    color: #EBEBEB;
+    overflow-x: hidden;
+    cursor: none;
+    /* Custom Cursor Logic */
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.07;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* CUSTOM CURSOR */
+.cursor-outer {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    transition: transform 0.1s ease, width 0.3s, height 0.3s;
+    mix-blend-mode: difference;
+}
+
+.cursor-inner {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    transition: transform 0.05s ease;
+}
+
+/* CINEMATIC TEXT REVEAL */
+.reveal-text {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.reveal-text span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.is-visible .reveal-text span {
+    transform: translateY(0);
+}
+
+/* IMAGE PARALLAX HOVER */
+.project-card img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+/* MAGNETIC BUTTON GLOW */
+.glow-btn {
+    position: relative;
+    background: #1a1a1a;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.glow-btn::before {
+    content: '';
+    position: absolute;
+    top: var(--y, 50%);
+    left: var(--x, 50%);
+    transform: translate(-50%, -50%);
+    width: 0px;
+    height: 0px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+    border-radius: 50%;
+    transition: width 0.5s, height 0.5s;
+}
+
+.glow-btn:hover {
+    border-color: white;
+}
+
+.glow-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* FAB PULSE */
+.fab-pulse {
+    animation: fab-pulse 2s infinite;
+}
+
+@keyframes fab-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+}
